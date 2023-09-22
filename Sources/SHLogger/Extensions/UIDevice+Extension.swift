@@ -108,9 +108,9 @@ internal extension UIDevice {
 
 public class Device {
     
-    static let os = UIDevice.current.systemName
-    static let osVersion = UIDevice.current.systemVersion
-    static let batteryCharge = UIDevice.current.batteryLevel
-    static let modelName = UIDevice.modelName
+    public static let os = UIDevice.current.systemName
+    public static let osVersion = UIDevice.current.systemVersion
+    public static let batteryCharge = UIDevice.current.batteryLevel
+    public static let modelName = UIDevice.modelName
     
 }
