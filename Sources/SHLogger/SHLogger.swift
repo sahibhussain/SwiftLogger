@@ -34,7 +34,7 @@ public class SHLogger {
     private static let kLogDirectoryName = "Logs"
     
     // MARK: - Singleton Instance
-    static let shared = SHLogger()
+    public static let shared = SHLogger()
     private init() {}
     
     private var profile = Profile.shared
