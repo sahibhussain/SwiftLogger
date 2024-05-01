@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Bundle {
+internal extension Bundle {
     
     var releaseVersionNumber: String {
         return object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown App Version"

@@ -106,7 +106,7 @@ internal extension UIDevice {
     
 }
 
-public class Device {
+internal class Device {
     
     public static let os = UIDevice.current.systemName
     public static let osVersion = UIDevice.current.systemVersion
