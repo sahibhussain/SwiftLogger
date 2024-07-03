@@ -53,9 +53,9 @@ public class SHLogger {
         case .debug:
             logger.debug("\(appendContents)")
         case .warning:
-            logger.warning("\(appendContents)")
-        case .error:
             logger.error("\(appendContents)")
+        case .error:
+            logger.critical("\(appendContents)")
         }
         
         if level != .info {
