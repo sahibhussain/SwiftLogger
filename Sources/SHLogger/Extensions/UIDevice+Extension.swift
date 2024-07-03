@@ -7,7 +7,7 @@
 
 import UIKit
 
-internal extension UIDevice {
+public extension UIDevice {
     
     static let modelName: String = {
         var systemInfo = utsname()
@@ -106,7 +106,7 @@ internal extension UIDevice {
     
 }
 
-internal class Device {
+public class Device {
     
     public static let os = UIDevice.current.systemName
     public static let osVersion = UIDevice.current.systemVersion

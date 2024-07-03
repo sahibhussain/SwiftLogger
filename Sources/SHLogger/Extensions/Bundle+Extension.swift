@@ -7,13 +7,13 @@
 
 import Foundation
 
-internal extension Bundle {
+public extension Bundle {
     
-    var releaseVersionNumber: String {
+    public var releaseVersionNumber: String {
         return object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown App Version"
     }
     
-    var buildVersionNumber: String {
+    public var buildVersionNumber: String {
         return object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown Bundle Version"
     }
     
