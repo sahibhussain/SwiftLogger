@@ -183,6 +183,8 @@ public class SHLogger {
 public extension SHLogger {
     
     func info(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+        print(logLevel, logLevel.rawValue)
+        print(Level.info, Level.info.rawValue)
         if logLevel.rawValue < Level.info.rawValue { return }
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.log(message, properties: properties, level: .info, fileName: fileName, line: line, column: column, functionName: functionName, loggerCategory: loggerCategory)
@@ -190,6 +192,8 @@ public extension SHLogger {
     }
     
     func debug(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+        print(logLevel, logLevel.rawValue)
+        print(Level.info, Level.info.rawValue)
         if logLevel.rawValue < Level.debug.rawValue { return }
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.log(message, properties: properties, level: .debug, fileName: fileName, line: line, column: column, functionName: functionName, loggerCategory: loggerCategory)
