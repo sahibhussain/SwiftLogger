@@ -22,9 +22,7 @@ public class SHLogger {
             case .error: return "Error"
             }
         }
-
-        public static let all: [Level] = [.debug, .info, .warning, .error]
-
+        
         func atLeast(_ level: Level) -> Bool {
             return level.rawValue >= rawValue
         }
@@ -40,8 +38,10 @@ public class SHLogger {
     private var profile = Profile.shared
     private var internalLogger = Logger(subsystem: "", category: "SHLogger")
     
+    public var logLevel: Level = .info
+    
     // Log a message if the logger's log level is equal to or lower than the specified level.
-    func log(_ message: String, properties: [String: Any]? = nil, level: Level = .info, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+    private func log(_ message: String, properties: [String: Any]?, level: Level, fileName: String, line: Int, column: Int, functionName: String, loggerCategory: String) {
         
         var appendContents = formattedMessage(message, properties: properties, level: level, fileName: fileName, line: line, column: column, functionName: functionName)
         
@@ -78,7 +78,7 @@ public class SHLogger {
         
     }
     
-    func formattedMessage(_ message: String, properties: [String: Any]?, level: Level, fileName: String, line: Int, column _: Int, functionName: String) -> String {
+    private func formattedMessage(_ message: String, properties: [String: Any]?, level: Level, fileName: String, line: Int, column _: Int, functionName: String) -> String {
         var appendContents = String()
         appendContents += "\(Date().toString())"
         appendContents += " [\(level.description)]"
@@ -111,7 +111,7 @@ public class SHLogger {
     }
     
     private func logDirectoryPath() -> URL {
-        let url = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]).appendingPathComponent(SHLogger.kLogDirectoryName)
+        let url = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.userDirectory, .userDomainMask, true)[0]).appendingPathComponent(SHLogger.kLogDirectoryName)
 
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
@@ -183,24 +183,28 @@ public class SHLogger {
 public extension SHLogger {
     
     func info(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+        if logLevel.rawValue < Level.info.rawValue { return }
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.log(message, properties: properties, level: .info, fileName: fileName, line: line, column: column, functionName: functionName, loggerCategory: loggerCategory)
         }
     }
     
     func debug(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+        if logLevel.rawValue < Level.debug.rawValue { return }
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.log(message, properties: properties, level: .debug, fileName: fileName, line: line, column: column, functionName: functionName, loggerCategory: loggerCategory)
         }
     }
 
     func warning(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+        if logLevel.rawValue < Level.warning.rawValue { return }
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.log(message, properties: properties, level: .warning, fileName: fileName, line: line, column: column, functionName: functionName, loggerCategory: loggerCategory)
         }
     }
 
     func error(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
+        if logLevel.rawValue < Level.error.rawValue { return }
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.log(message, properties: properties, level: .error, fileName: fileName, line: line, column: column, functionName: functionName, loggerCategory: loggerCategory)
         }
