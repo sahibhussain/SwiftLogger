@@ -59,12 +59,12 @@ public class SHLogger {
         }
         
         if level != .info {
-            let logFile = logFilePath()
+            guard let logFile = logFilePath() else { return }
             if !FileManager.default.fileExists(atPath: logFile) {
                 appendContents = headerContent() + appendContents
                 internalLogger.info("Log file created")
             } else {
-                appendContents = logPrint() + appendContents
+                appendContents = logFile + appendContents
             }
 
             appendContents += "\n\n"
@@ -110,9 +110,8 @@ public class SHLogger {
         return components.isEmpty ? "" : components.last!
     }
     
-    private func logDirectoryPath() -> URL {
-        let url = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.userDirectory, .userDomainMask, true)[0]).appendingPathComponent(SHLogger.kLogDirectoryName)
-
+    private func logDirectoryPath() -> URL? {
+        guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent(SHLogger.kLogDirectoryName) else { return nil }
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.createDirectory(atPath: url.path, withIntermediateDirectories: false, attributes: nil)
@@ -153,17 +152,19 @@ public class SHLogger {
     }
     
     private func logData() -> Data? {
-        return FileManager.default.contents(atPath: logFilePath())
+        guard let path = logFilePath() else { return nil }
+        return FileManager.default.contents(atPath: path)
     }
     
     
-    public func logFilePath() -> String {
-        return "\(logDirectoryPath().appendingPathComponent(todayDate()).path).txt"
+    public func logFilePath() -> String? {
+        guard let url = logDirectoryPath() else { return nil }
+        return "\(url.appendingPathComponent(todayDate()).path).txt"
     }
     
-    public func logPrint() -> String {
+    public func logPrint() -> String? {
         var content: String?
-        let path = logFilePath()
+        guard let path = logFilePath() else { return nil }
 
         if FileManager.default.fileExists(atPath: path) {
             do {
@@ -175,7 +176,9 @@ public class SHLogger {
     }
     
     public func deleteLogDir() {
-        try? FileManager.default.removeItem(at: logDirectoryPath())
+        if let url = logDirectoryPath() {
+            try? FileManager.default.removeItem(at: url)
+        }
     }
     
 }
