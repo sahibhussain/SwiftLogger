@@ -5,7 +5,7 @@
 import Foundation
 import OSLog
 
-public class Logger {
+public class SwiftLogger {
     
     // Enum defining our log levels
     public enum Level: Int {
@@ -32,7 +32,7 @@ public class Logger {
     private static let kLogDirectoryName = "Logs"
     
     // MARK: - Singleton Instance
-    public static let shared = Logger()
+    public static let shared = SwiftLogger()
     private init() {}
     
     private var profile = Profile.shared
@@ -111,7 +111,7 @@ public class Logger {
     }
     
     private func logDirectoryPath() -> URL? {
-        guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent(SHLogger.kLogDirectoryName) else { return nil }
+        guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent(SwiftLogger.kLogDirectoryName) else { return nil }
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.createDirectory(atPath: url.path, withIntermediateDirectories: false, attributes: nil)
@@ -183,7 +183,7 @@ public class Logger {
     
 }
 
-public extension SHLogger {
+public extension SwiftLogger {
     
     func info(_ message: String, properties: [String: Any]? = nil, fileName: String = #file, line: Int = #line, column: Int = #column, functionName: String = #function, loggerCategory: String = "Default") {
         if logLevel.rawValue > Level.info.rawValue { return }
