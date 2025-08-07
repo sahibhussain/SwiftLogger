@@ -7,7 +7,9 @@ let package = Package(
     name: "SwiftLogger",
     platforms: [
         .iOS(.v15),
-        .macOS(.v10_15)
+        .macOS(.v10_15),
+        .watchOS(.v8),
+        .tvOS(.v15)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
