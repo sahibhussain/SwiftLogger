@@ -5,7 +5,7 @@
 import Foundation
 import OSLog
 
-public class SHLogger {
+public class Logger {
     
     // Enum defining our log levels
     public enum Level: Int {
@@ -32,7 +32,7 @@ public class SHLogger {
     private static let kLogDirectoryName = "Logs"
     
     // MARK: - Singleton Instance
-    public static let shared = SHLogger()
+    public static let shared = Logger()
     private init() {}
     
     private var profile = Profile.shared
