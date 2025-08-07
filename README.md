@@ -1,3 +1,4 @@
+
 ![SwiftLogger thumbnail](https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/96dccea7-b1e6-43df-846c-df87fad6bcf8.png)
 # SwiftLogger
 
@@ -68,14 +69,18 @@ Each logging function accepts the following parameters:
 - `loggerCategory: String`: Category of the log
 
 ```swift
-SwiftLogger.shared.info("message", properties = nil, fileName = #file, line = #line, column = #column, functionName = #function, loggerCategory = "Default")
+SwiftLogger.shared.info("message", properties: nil, fileName: #file, line: #line, column: #column, functionName: #function, loggerCategory: "Default")
 
-SwiftLogger.shared.debug("message", properties = nil, fileName = #file, line = #line, column = #column, functionName = #function, loggerCategory = "Default")
+SwiftLogger.shared.debug("message", properties: nil, fileName: #file, line: #line, column: #column, functionName: #function, loggerCategory: "Default")
 
-SwiftLogger.shared.warning("message", properties = nil, fileName = #file, line = #line, column = #column, functionName = #function, loggerCategory = "Default")
+SwiftLogger.shared.warning("message", properties: nil, fileName: #file, line: #line, column: #column, functionName: #function, loggerCategory: "Default")
 
-SwiftLogger.shared.error("message", properties = nil, fileName = #file, line = #line, column = #column, functionName = #function, loggerCategory = "Default")
+SwiftLogger.shared.error("message", properties: nil, fileName: #file, line: #line, column: #column, functionName: #function, loggerCategory: "Default")
 ```
+
+### Log File
+
+All the logs above the log level provided will get saved in `cachesDirectory` and hence can be retrieved for further analysis. This is particularly helpful in a production environment where you can't debug your app directly.
 
 ## Support
 
