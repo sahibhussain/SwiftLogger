@@ -55,6 +55,7 @@ public extension UIDevice {
             case "iPhone8,4":                                     return "iPhone SE"
             case "iPhone12,8":                                    return "iPhone SE (2nd generation)"
             case "iPhone14,6":                                    return "iPhone SE (3rd generation)"
+                
             case "iPad2,1", "iPad2,2", "iPad2,3", "iPad2,4":      return "iPad 2"
             case "iPad3,1", "iPad3,2", "iPad3,3":                 return "iPad (3rd generation)"
             case "iPad3,4", "iPad3,5", "iPad3,6":                 return "iPad (4th generation)"
@@ -84,11 +85,11 @@ public extension UIDevice {
             case "iPad8,5", "iPad8,6", "iPad8,7", "iPad8,8":      return "iPad Pro (12.9-inch) (3rd generation)"
             case "iPad8,11", "iPad8,12":                          return "iPad Pro (12.9-inch) (4th generation)"
             case "iPad13,8", "iPad13,9", "iPad13,10", "iPad13,11":return "iPad Pro (12.9-inch) (5th generation)"
-            case "AppleTV5,3":                                    return "Apple TV"
-            case "AppleTV6,2":                                    return "Apple TV 4K"
+                
             case "AudioAccessory1,1":                             return "HomePod"
             case "AudioAccessory5,1":                             return "HomePod mini"
             case "i386", "x86_64", "arm64":                       return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
+                
             default:                                              return identifier
             }
             #elseif os(tvOS)

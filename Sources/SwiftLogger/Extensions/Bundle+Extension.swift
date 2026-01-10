@@ -9,11 +9,11 @@ import Foundation
 
 public extension Bundle {
     
-    public var releaseVersionNumber: String {
+    var releaseVersionNumber: String {
         return object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown App Version"
     }
     
-    public var buildVersionNumber: String {
+    var buildVersionNumber: String {
         return object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown Bundle Version"
     }
     
