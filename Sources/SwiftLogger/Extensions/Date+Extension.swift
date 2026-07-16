@@ -1,26 +1,28 @@
-//
-//  File.swift
-//  
-//
-//  Created by Sahib Hussain on 22/09/23.
-//
-
 import Foundation
 
 internal extension Date {
-    
-    private static var dateFormat = "yyyy-MM-dd hh:mm:ss.SSS"
-    
-    private static var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormat
-        formatter.locale = Locale.current
-        formatter.timeZone = TimeZone.current
-        return formatter
-    }
+
+    private static let timestampFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd hh:mm:ss.SSS"
+        f.locale = Locale.current
+        f.timeZone = TimeZone.current
+        return f
+    }()
+
+    static let logDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        f.locale = Locale.current
+        f.timeZone = TimeZone.current
+        return f
+    }()
 
     func toString() -> String {
-        return Date.dateFormatter.string(from: self as Date)
+        Date.timestampFormatter.string(from: self)
     }
-    
+
+    func toDateString() -> String {
+        Date.logDateFormatter.string(from: self)
+    }
 }
