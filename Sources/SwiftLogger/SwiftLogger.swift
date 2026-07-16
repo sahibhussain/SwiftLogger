@@ -125,13 +125,13 @@ public extension SwiftLogger {
         line: Int = #line,
         column: Int = #column,
         functionName: String = #function,
-        category: String = "Default"
+        loggerCategory: String = "Default"
     ) {
         guard logLevel <= .info else { return }
         let entry = LogEntry(
             message: message, level: .info, isPublic: isPublic,
             properties: properties, fileName: fileName, line: line,
-            column: column, functionName: functionName, category: category
+            column: column, functionName: functionName, category: loggerCategory
         )
         logQueue.async { [weak self] in self?.route(entry) }
     }
@@ -144,13 +144,13 @@ public extension SwiftLogger {
         line: Int = #line,
         column: Int = #column,
         functionName: String = #function,
-        category: String = "Default"
+        loggerCategory: String = "Default"
     ) {
         guard logLevel <= .debug else { return }
         let entry = LogEntry(
             message: message, level: .debug, isPublic: isPublic,
             properties: properties, fileName: fileName, line: line,
-            column: column, functionName: functionName, category: category
+            column: column, functionName: functionName, category: loggerCategory
         )
         logQueue.async { [weak self] in self?.route(entry) }
     }
@@ -163,13 +163,13 @@ public extension SwiftLogger {
         line: Int = #line,
         column: Int = #column,
         functionName: String = #function,
-        category: String = "Default"
+        loggerCategory: String = "Default"
     ) {
         guard logLevel <= .warning else { return }
         let entry = LogEntry(
             message: message, level: .warning, isPublic: isPublic,
             properties: properties, fileName: fileName, line: line,
-            column: column, functionName: functionName, category: category
+            column: column, functionName: functionName, category: loggerCategory
         )
         logQueue.async { [weak self] in self?.route(entry) }
     }
@@ -182,13 +182,13 @@ public extension SwiftLogger {
         line: Int = #line,
         column: Int = #column,
         functionName: String = #function,
-        category: String = "Default"
+        loggerCategory: String = "Default"
     ) {
         guard logLevel <= .error else { return }
         let entry = LogEntry(
             message: message, level: .error, isPublic: isPublic,
             properties: properties, fileName: fileName, line: line,
-            column: column, functionName: functionName, category: category
+            column: column, functionName: functionName, category: loggerCategory
         )
         logQueue.async { [weak self] in self?.route(entry) }
     }
